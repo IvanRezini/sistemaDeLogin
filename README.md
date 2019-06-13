@@ -5,4 +5,4 @@ Aula de introdução  a Prog.Web - Criacao de um sistema de login
 Leaute Bootstrap
 
 ## aoula 02 -13 de junho de 2019
-Formulario e **validação**
+Formulario e ~~validação~~
