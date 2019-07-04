@@ -7,15 +7,16 @@
 
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://jqueryvalidation.org/files/demo/site-demos.css">
 
         <title>Sistema de Login</title>
-        
+
         <style>
             #alerta,#caixaRegistro,#caixaSenha{
                 display: none;
             }
         </style>
-        
+
     </head>
     <body class="bg-dark">
         <main class="container mt-4">
@@ -46,7 +47,7 @@
                             <input type="password" name="senhaUsuario" class="form-control" placeholder="Senha" required minlength="6">
                         </div>
 
-                        <div class="form-group">
+                        <div class="form-group mt-5">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="lembrar" id="checkLembrar" class="custom-control-input">
                                 <label for="checkLembrar" class="custom-control-label">
@@ -57,7 +58,7 @@
                                 </a>
                             </div>
                         </div>
-                       
+
                         <div class="form-group">
                             <input type="submit" name="btnEntrar" id="btnentrar" value=":: Entrar ::" class="btn btn-primary btn-block">
                         </div>
@@ -81,13 +82,13 @@
                 <div class="col-lg-4 offset-lg-4 bg-light rounded" id="caixaRegistro">
                     <h2 class="text-center mt-2">Registrar-se</h2>
                     <form action="#" method="post" role="form" class="p-2" id="formRegistro">
-                        
-                        
-                         <!--campo nome Completo-->
-                         <div class="form-group">
-                             <input type="text" name="nomeCompleto" class="form-control" placeholder="Nome completo" required minlength="6">
 
-                         </div>
+
+                        <!--campo nome Completo-->
+                        <div class="form-group">
+                            <input type="text" name="nomeCompleto" class="form-control" placeholder="Nome completo" required minlength="6">
+
+                        </div>
                         <!--campo nome usuario-->
                         <div class="form-group">
                             <input type="text" name="nomeUsuario" class="form-control" placeholder="Nome do usuario" required minlength="6">
@@ -100,31 +101,31 @@
                         <div class="form-group">
                             <input type="password" id="senhaUsuario" class="form-control" placeholder="Senha" required minlength="6">
                         </div>
-                          <!--campo de confirmaçao de senha-->
+                        <!--campo de confirmaçao de senha-->
                         <div class="form-group">
                             <input type="password" id="senhaUsuarioConfirmar" name="senhaUsuarioConfirmar" class="form-control" placeholder="Confirmar senha" required minlength="6">
                         </div>
-                          
-                          <div class="form-group">  
-                              <div class="custom-control custom-checkbox">
-                              <input type="checkbox" name="concordar" class="custom-control-input" id="checkConcordar">
-                              <label for="checkConcordar" class="custom-control-label">
-                                  Eu concordo com os 
-                                  <a href="#"> termos de condições.</a>
-                              </label>
-                              </div>
-                          </div>
-                          
-                          <div class="form-group">
-                              <input type="submit" name="btnRegistroUsuario" id="btnRegistraoUsuario" value=":: Registrar ::" class="btn btn-primary btn-block ">
-                          </div>
-                          <!--ja registrado-->
-                          <div class="form-group">
-                              <p class="text-center">
-                                  Já registrado?
-                                  <a href="#" id="btnEntrarRegistrado">Entrar aqui.</a>
-                              </p>
-                          </div>
+
+                        <div class="form-group mt-5">  
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" name="concordar" class="custom-control-input" id="checkConcordar">
+                                <label for="checkConcordar" class="custom-control-label">
+                                    Eu concordo com os 
+                                    <a href="#"> termos de condições.</a>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" name="btnRegistroUsuario" id="btnRegistraoUsuario" value=":: Registrar ::" class="btn btn-primary btn-block ">
+                        </div>
+                        <!--ja registrado-->
+                        <div class="form-group">
+                            <p class="text-center">
+                                Já registrado?
+                                <a href="#" id="btnEntrarRegistrado">Entrar aqui.</a>
+                            </p>
+                        </div>
 
                     </form>
 
@@ -169,34 +170,75 @@
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script> 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+
+        <script>
             //$(document).ready(function (){});
             //as duas formas sao posiveis
             //jQuery
-            $(function(){
+            $(function () {
                 //vai para caixa recuperar senha
-                $("#btnEsqueci").click(function(){
+                $("#btnEsqueci").click(function () {
                     $("#caixaLogin").hide();
                     $("#caixaSenha").show();
                 });
-                
+
                 //voltar para a tela login saindo da tela de recuperaçao de senha
-                $("#btnVoltar").click(function(){
-                     $("#caixaSenha").hide();
+                $("#btnVoltar").click(function () {
+                    $("#caixaSenha").hide();
                     $("#caixaLogin").show();
                 });
-                
-              //ir para a tela registrar-se
-                $("#btnRegistrar").click(function(){
-                     $("#caixaLogin").hide();
+
+                //ir para a tela registrar-se
+                $("#btnRegistrar").click(function () {
+                    $("#caixaLogin").hide();
                     $("#caixaRegistro").show();
                 });
                 //voltar para a tela login saindo da tela registrar-se
-                 $("#btnEntrarRegistrado").click(function(){
-                     $("#caixaRegistro").hide();
+                $("#btnEntrarRegistrado").click(function () {
+                    $("#caixaRegistro").hide();
                     $("#caixaLogin").show();
                 });
-                 //btnEntrarRegistrado
+                //validaçao com jQuery
+                
+                //pra ficar azul
+                jQuery.validator.setDefaults({
+                    debug: false,
+                    success: "valid"
+                });
+                $("#formLogin").validate();
+                $("#formSenha").validate();
+                $("#formRegistro").validate({
+                    rules:{
+                        senhaUsuarioConfirmar:{
+                            equalTo:"#senhaUsuario"
+                        }
+                    }
+                });
+            });
+            /*
+             * Translated default messages for the jQuery validation plugin.
+             * Locale: PT_BR
+             * Traduçao  do jquery validate
+             */
+            jQuery.extend(jQuery.validator.messages, {
+                required: "Este campo &eacute; requerido.",
+                remote: "Por favor, corrija este campo.",
+                email: "Por favor, forne&ccedil;a um endere&ccedil;o eletr&ocirc;nico v&aacute;lido.",
+                url: "Por favor, forne&ccedil;a uma URL v&aacute;lida.",
+                date: "Por favor, forne&ccedil;a uma data v&aacute;lida.",
+                dateISO: "Por favor, forne&ccedil;a uma data v&aacute;lida (ISO).",
+                number: "Por favor, forne&ccedil;a um n&uacute;mero v&aacute;lido.",
+                digits: "Por favor, forne&ccedil;a somente d&iacute;gitos.",
+                creditcard: "Por favor, forne&ccedil;a um cart&atilde;o de cr&eacute;dito v&aacute;lido.",
+                equalTo: "Por favor, forne&ccedil;a o mesmo valor novamente.",
+                accept: "Por favor, forne&ccedil;a um valor com uma extens&atilde;o v&aacute;lida.",
+                maxlength: jQuery.validator.format("Por favor, forne&ccedil;a n&atilde;o mais que {0} caracteres."),
+                minlength: jQuery.validator.format("Por favor, forne&ccedil;a ao menos {0} caracteres."),
+                rangelength: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1} caracteres de comprimento."),
+                range: jQuery.validator.format("Por favor, forne&ccedil;a um valor entre {0} e {1}."),
+                max: jQuery.validator.format("Por favor, forne&ccedil;a um valor menor ou igual a {0}."),
+                min: jQuery.validator.format("Por favor, forne&ccedil;a um valor maior ou igual a {0}.")
             });
         </script>
     </body>
