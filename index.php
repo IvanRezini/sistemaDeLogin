@@ -198,9 +198,10 @@
                 $("#btnEntrarRegistrado").click(function () {
                     $("#caixaRegistro").hide();
                     $("#caixaLogin").show();
+                    
                 });
                 //validaçao com jQuery
-                
+                //agora vai
                 //pra ficar azul
                 jQuery.validator.setDefaults({
                     debug: false,
