@@ -167,7 +167,7 @@
         </main>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
@@ -198,7 +198,7 @@
                 $("#btnEntrarRegistrado").click(function () {
                     $("#caixaRegistro").hide();
                     $("#caixaLogin").show();
-                    
+
                 });
                 //validaçao com jQuery
                 //agora vai
@@ -210,12 +210,30 @@
                 $("#formLogin").validate();
                 $("#formSenha").validate();
                 $("#formRegistro").validate({
-                    rules:{
-                        senhaUsuarioConfirmar:{
-                            equalTo:"#senhaUsuario"
+                    rules: {
+                        senhaUsuarioConfirmar: {
+                            equalTo: "#senhaUsuario"
                         }
                     }
                 });
+
+                //envio de dados via Ajax
+                //sem recaregar a página
+                $("#btnRegistraoUsuario").click(function (e) {
+
+                    if (document.querySelector("#formRegistro").checkValidity()) {
+                        //Nao deixa om formulario ser enviado
+                        e.preventDefault();
+                        $.ajax({
+                            url: 'recebe.php', method: 'post', data: $('formRegistro').serialize() + '&action=registro',
+                            success:function(resposta) {
+                                $('#alerta').show();
+                                $('#resultado').html(resposta);
+                            }
+                        });
+                    }
+                });
+
             });
             /*
              * Translated default messages for the jQuery validation plugin.
