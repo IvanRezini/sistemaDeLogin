@@ -219,20 +219,61 @@
 
                 //envio de dados via Ajax
                 //sem recaregar a página
+                //pagina registro
                 $("#btnRegistraoUsuario").click(function (e) {
 
                     if (document.querySelector("#formRegistro").checkValidity()) {
                         //Nao deixa om formulario ser enviado
                         e.preventDefault();
                         $.ajax({
-                            url: 'recebe.php', method: 'post', data: $('formRegistro').serialize() + '&action=registro',
+                            url: 'recebe.php', method: 'post', data:$('formRegistro').serialize()+'&action=registro',
                             success:function(resposta) {
                                 $('#alerta').show();
                                 $('#resultado').html(resposta);
                             }
                         });
                     }
+                    return true;
                 });
+                //fim do ajax 
+                
+                //envio de dados via Ajax
+                //sem recaregar a página
+                $("#btnEntra").click(function(e) {
+
+                    if (document.querySelector("#formLogin").checkValidity()) {
+                        //Nao deixa om formulario ser enviado
+                        e.preventDefault();
+                        $.ajax({
+                            url: 'recebe.php', method: 'post', data:$('formLogin').serialize()+'&action=entrar',
+                            success:function(resposta) {
+                                $('#alerta').show();
+                                $('#resultado').html(resposta);
+                            }
+                        });
+                    }
+                    return true;
+                });
+                //fim do ajax Entrar
+                
+                //envio de dados via Ajax
+                //pagina gerar senha
+                $("#btnGerar").click(function (e) {
+
+                    if (document.querySelector("#formSenha").checkValidity()) {
+                        //Nao deixa om formulario ser enviado
+                        e.preventDefault();
+                        $.ajax({
+                            url: 'recebe.php', method: 'post', data:$('formSenha').serialize()+'&action=gerar',
+                            success:function(resposta) {
+                                $('#alerta').show();
+                                $('#resultado').html(resposta);
+                            }
+                        });
+                    }
+                    return true;
+                });
+                //fim do ajax gerar senha
 
             });
             /*
