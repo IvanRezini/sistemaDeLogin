@@ -60,7 +60,7 @@
                         </div>
 
                         <div class="form-group">
-                            <input type="submit" name="btnEntrar" id="btnentrar" value=":: Entrar ::" class="btn btn-primary btn-block">
+                            <input type="submit" name="btnEntrar" id="btnEntrar" value=":: Entrar ::" class="btn btn-primary btn-block">
                         </div>
 
                         <div class="form-group">
@@ -239,7 +239,7 @@
                 
                 //envio de dados via Ajax
                 //sem recaregar a página
-                $("#btnEntra").click(function(e) {
+                $("#btnEntrar").click(function(e) {
 
                     if (document.querySelector("#formLogin").checkValidity()) {
                         //Nao deixa om formulario ser enviado
