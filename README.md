@@ -1,15 +1,15 @@
 # sistemaDeLogin
-Aula de introdução  a Prog.Web - Criacao de um sistema de login
+Aula de Introdução à Prog. Web - Criação de um sistema de Login
 
-## aula 01 - 06 de junho de 2019
-Leaute Bootstrap
+## aula01 - 06 de junho de 2019
+Leiaute Bootstrap
 
-## aula 02 - 13 de junho de 2019
-Formulario e ~~validação~~
+## aula02 - 13 de junho de 2019
+Formulários e ~~validação~~
 
-## aula 03  - 27 de junho de 2019
-Mostrar e esconder Formularios
+## aula03 - 27 de junho de 2019
+Mostrar e esconder formulários.
 
-## aula 04  04 de julho de 2019
+## aula04 - 04 de julho de 2019
 Validação com jQuery e envio de 
-dados com Ajax. ~~ recepção com PHP~~
+dados com Ajax. ~~Recepção com PHP~~
