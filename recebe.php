@@ -1,4 +1,6 @@
 <?php
+session_start(); //Inicialização da sessao 
+//Memoria de Login entre todas as paginas
 
 //Importando as configuraçoes de Banco de dados
 require_once 'configDB.php';
@@ -11,7 +13,41 @@ function verificar_entrada($entrada) {
     return $saida;
 }
 
-if (isset($_POST['action']) && $_POST['action'] == 'registro') {
+if (isset($_POST['action']) && $_POST['action'] == 'entrar') {
+    //echo 'entrou';
+    $nomeUsuario = verificar_entrada($_POST['nomeUsuario']);
+    $senhaUsuario = verificar_entrada($_POST['senhaUsuario']);
+    $senha = sha1($senhaUsuario);
+//sha1 40Caracteres
+    
+    $sql = $conexão->prepare("SELECT * FROM usuario " . "WHERE nomeUsuario=? AND senha=?");
+    $sql->bind_param("ss", $nomeUsuario, $senha);
+    $sql->execute();
+
+    $busca = $sql->fetch();
+    
+    if($busca != null){
+        //usuario e senha estão corretos
+       $_SESSION['nomeUsuario'] = $nomeUsuario;
+       echo 'ok';
+       
+       if(!empty($_POST['checkLembrar'])){
+           setcookie("nomeUsuario",$nomeUsuario, time()+(365*24*60*60));//1 ano de vida em segundos
+           setcookie("senhaUsuario",$senha, time()+(365*24*60*60));
+           
+       } else {
+           //Limpa o cookie
+           if(isset($_COOKIE["nomeUsuario"]))
+               setcookie ("nomeUsuario",'');
+          if(isset($_COOKIE["senhaUsuario"]))
+               setcookie ("senhaUsuario",'');
+           
+       }
+    }else    
+        echo 'Falhou o login';
+
+//sanitização de entradas POST
+} elseif (isset($_POST['action']) && $_POST['action'] == 'registro') {
     $nomeCompleto = verificar_entrada($_POST['nomeCompleto']);
     $nomeUsuario = verificar_entrada($_POST['nomeUsuario']);
     $emailUsuario = verificar_entrada($_POST['emailUsuario']);
@@ -27,8 +63,8 @@ if (isset($_POST['action']) && $_POST['action'] == 'registro') {
     // Conferancia de senha no Back end 
     if ($senha != $senhaConfirmar) {
         echo "as senhas nao Conferem  \n ";
-        echo $senhaUsuario ."  " . $senhaUsuariConfirmar ."\n";
-        echo $senha ."  " . $senhaConfirmar;
+        echo $senhaUsuario . "  " . $senhaUsuariConfirmar . "\n";
+        echo $senha . "  " . $senhaConfirmar;
     } else {
         //Verificando se o usuario existe no Banco de dados
         //Usando MySQl prepared statment
@@ -52,4 +88,6 @@ if (isset($_POST['action']) && $_POST['action'] == 'registro') {
             }
         }
     }
+} else {
+    header("location:index.php");
 }
