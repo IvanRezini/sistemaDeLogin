@@ -53,7 +53,7 @@ if (isset($_POST['action']) && $_POST['action'] == 'entrar') {
     $emailUsuario = verificar_entrada($_POST['emailUsuario']);
     $senhaUsuario = verificar_entrada($_POST['senhaUsuario']);
     $senhaUsuariConfirmar = verificar_entrada($_POST['senhaUsuarioConfirmar']);
-    $criado = date("y-m-d"); //cria uma data ano mes dia
+    $criado = date("y-m-d H:i:s"); //cria uma data ano mes dia
     // Gerar um hassh para senhas
     $senha = sha1($senhaUsuario);
     $senhaConfirmar = sha1($senhaUsuariConfirmar);
