@@ -31,9 +31,9 @@ if (isset($_POST['action']) && $_POST['action'] == 'entrar') {
        $_SESSION['nomeUsuario'] = $nomeUsuario;
        echo 'ok';
        
-       if(!empty($_POST['checkLembrar'])){
+       if(!empty($_POST['lembrar'])){
            setcookie("nomeUsuario",$nomeUsuario, time()+(365*24*60*60));//1 ano de vida em segundos
-           setcookie("senhaUsuario",$senha, time()+(365*24*60*60));
+           setcookie("senhaUsuario", $senhaUsuario, $senha, time()+(365*24*60*60));
            
        } else {
            //Limpa o cookie

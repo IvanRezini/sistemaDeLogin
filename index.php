@@ -48,13 +48,15 @@ if(isset($_SESSION['nomeUsuario']))
                         Entrada
                     </h2>
                     <form action="#" method="post" role="form"
-                          class="p-2" id="formLogin">
+                          class="p-2" id="formLogin" >
 
                         <div class="form-group">
                             <input type="text" name="nomeUsuario"
                                    class="form-control"
                                    placeholder="Nome do usuário"
-                                   required minlength="5">
+                                   required minlength="5" value="<?=
+                                    isset($_COOKIE['nomeUsuario'])?
+                                   :"";?>">
                         </div>
 
                         <div class="form-group">
@@ -62,14 +64,20 @@ if(isset($_SESSION['nomeUsuario']))
                                    name="senhaUsuario"
                                    class="form-control"
                                    placeholder="Senha"
-                                   required minlength="6">
+                                   required minlength="6" value="<?=
+                                   isset($_COOKIE['senhaUsuario'])?
+                                 'checked'
+                                   :'';?>">
                         </div>
 
                         <div class="form-group mt-5">
                             <div class="custom-control custom-checkbox">
                                 <input type="checkbox" name="lembrar"
                                        id="checkLembrar" 
-                                       class="custom-control-input">
+                                       class="custom-control-input"
+                                    <?php= isset($_COOKIE['senhaUsuario'])?
+                                            'checked'
+                                            :'';?>>
                                 <label for="checkLembrar" 
                                        class="custom-control-label">
                                     Lembrar de mim.
