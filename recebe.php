@@ -88,6 +88,10 @@ if (isset($_POST['action']) && $_POST['action'] == 'entrar') {
             }
         }
     }
-} else {
+} elseif (isset($_POST['action']) && $_POST['action'] == 'gerar') {  
+  //  echo 'Gerando nova senha'; 
+   $emailGerarSenha = verificar_entrada($_POST["emailGerarSenha"]);  
+    echo $emailGerarSenha;
+}else {
     header("location:index.php");
 }
