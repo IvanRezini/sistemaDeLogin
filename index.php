@@ -21,7 +21,8 @@ if(isset($_SESSION['nomeUsuario']))
         <style>
             #alerta,
             #caixaRegistro,
-            #caixaSenha{
+            #caixaSenha,
+            #espera{
                 display: none;
             }  
         </style>
@@ -39,7 +40,12 @@ if(isset($_SESSION['nomeUsuario']))
                     </div>
                 </div>
             </section>
-
+            <!--Spinner de espera-->
+            <div class="col-lg-4 offset-lg-4 text-center mb-4">
+                <div class="spinner-border text-primary" role="status" id="espera">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
             <!-- Formulário de Login -->
             <section class="row">
                 <div class="col-lg-4 offset-lg-4 bg-light rounded"
@@ -55,8 +61,7 @@ if(isset($_SESSION['nomeUsuario']))
                                    class="form-control"
                                    placeholder="Nome do usuário"
                                    required minlength="5" value="<?=
-                                    isset($_COOKIE['nomeUsuario'])?
-                                   :"";?>">
+                                    isset($_COOKIE['nomeUsuario'])?$_COOKIE['nomeUsuario']:"";?>">
                         </div>
 
                         <div class="form-group">
@@ -64,10 +69,7 @@ if(isset($_SESSION['nomeUsuario']))
                                    name="senhaUsuario"
                                    class="form-control"
                                    placeholder="Senha"
-                                   required minlength="6" value="<?=
-                                   isset($_COOKIE['senhaUsuario'])?
-                                 'checked'
-                                   :'';?>">
+                                   required minlength="6" value="<?=isset($_COOKIE['senhaUsuario'])?$_COOKIE['senhaUsuario']:'';?>">
                         </div>
 
                         <div class="form-group mt-5">
@@ -75,7 +77,7 @@ if(isset($_SESSION['nomeUsuario']))
                                 <input type="checkbox" name="lembrar"
                                        id="checkLembrar" 
                                        class="custom-control-input"
-                                    <?php= isset($_COOKIE['senhaUsuario'])?
+                                    <?= isset($_COOKIE['senhaUsuario'])?
                                             'checked'
                                             :'';?>>
                                 <label for="checkLembrar" 
@@ -298,12 +300,14 @@ if(isset($_SESSION['nomeUsuario']))
                             .checkValidity()) {
                         //Não deixa o formulário ser enviado    
                         e.preventDefault();
+                        $("#espera").show();
                         $.ajax({
                             url: 'recebe.php',
                             method: 'post',
                             data: $('#formRegistro')
                                     .serialize() + '&action=registro',
                             success: function (resposta) {
+                                $("#espera").hide();
                                 $('#alerta').show();
                                 $('#resultado').html(resposta);
                             }
@@ -321,12 +325,14 @@ if(isset($_SESSION['nomeUsuario']))
                             .checkValidity()) {
                         //Não deixa o formulário ser enviado    
                         e.preventDefault();
+                         $("#espera").show();
                         $.ajax({
                             url: 'recebe.php',
                             method: 'post',
                             data: $('#formLogin')
                                     .serialize() + '&action=entrar',
                             success: function (resposta) {
+                                  $("#espera").hide();
                                 if (resposta === "ok") {
                                     window.location = "perfil.php";
                                 }else{ $('#alerta').show();
@@ -347,12 +353,14 @@ if(isset($_SESSION['nomeUsuario']))
                             .checkValidity()) {
                         //Não deixa o formulário ser enviado    
                         e.preventDefault();
+                        $("#espera").show();
                         $.ajax({
                             url: 'recebe.php',
                             method: 'post',
                             data: $('#formSenha')
                                     .serialize() + '&action=gerar',
                             success: function (resposta) {
+                                $("#espera").hide();
                                 $('#alerta').show();
                                 $('#resultado').html(resposta);
                             }
