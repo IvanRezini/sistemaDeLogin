@@ -1,6 +1,10 @@
 # sistemaDeLogin
 Aula de Introdução à Prog. Web - Criação de um sistema de Login
 
+##aula 08 25 de junho de 2019: godmode:
+sistema de geraçao de nova senha 
+com token e tempo de vida token
+
 ## aula 07- 18 de junho de 2019 :bat:
 Sessão e Cookie funcionamento, preparaçao para recuperar senha.
 :cookie: 
