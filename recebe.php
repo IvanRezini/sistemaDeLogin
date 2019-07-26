@@ -91,7 +91,31 @@ if (isset($_POST['action']) && $_POST['action'] == 'entrar') {
 } elseif (isset($_POST['action']) && $_POST['action'] == 'gerar') {  
   //  echo 'Gerando nova senha'; 
    $emailGerarSenha = verificar_entrada($_POST["emailGerarSenha"]);  
-    echo $emailGerarSenha;
+    
+   $sql =$conexão->prepare("SELECT idUsuario FROM usuario WHERE email=?");
+   $sql->bind_param("s",$emailGerarSenha);
+   $sql->execute();
+   $resposta = $sql->get_result();
+   if($resposta->num_rows>0){#email existe no banco de dados 
+       # Geraçao do token, 10 caracteresaleatorios
+       $frase = "jose Pereira";
+       $palavra_secreta = str_shuffle($frase);
+       $token = substr($palavra_secreta, 0,10);
+       
+       #Atualizaçao do baco de dados e a validade
+       $sql = $conexão->prepare("UPDATE usuario set token=? ," . "tokenExpirado= DATE_ADD(now(), INTERVAL 5 MINUTE) " . "WHERE email=?");
+       $sql->bind_param("ss",$token, $emailGerarSenha);
+       $sql->execute();
+       
+       #simulaçao do envio do link por email 
+       #o codigo deve ser enviado por email
+       $link = "<p><a href='http://localhost:8080/sistemaDeLogin/gerarSenha.php?email=$emailGerarSenha&token=$token'>Clique aqui</a> para gerar uma nova senha. </p>";
+       echo $link;
+   }else{#email não existe
+       echo "<strong class= 'text-danger'>" . "E-mail não encontrado</strong>";
+   }
+   
+   
 }else {
     header("location:index.php");
 }
